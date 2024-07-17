@@ -138,7 +138,7 @@ export default function TODOLIST() {
             />
             <button
               onClick={handleClick}
-              className="w-3/12 bg-blue-200 text-lg font-bold text-blue-400  rounded"
+              className="w-3/12 bg-blue-200 text-lg font-bold text-blue-500 rounded hover:bg-blue-300 transition-all"
             >
               ADD
             </button>

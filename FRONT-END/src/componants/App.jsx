@@ -21,7 +21,7 @@ export default function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<Signup />} />
             {!isAuthenticated && <Route path="/login" element={<Login />} /> }
-            {!isAuthenticated && <Route path="/forgetpassword" element={<ForgetPW />} />}
+            {!isAuthenticated && <Route path="/forgetpassword" element={<ErrorPage/>} />}
             {isAuthenticated && <Route path="/todos" element={<ProtectedRoute element={<TODOLIST />} />} />}
             <Route path="*" element={ isAuthenticated ? <Navigate to="/todos"/> : <ErrorPage/>} /> 
           </Route>

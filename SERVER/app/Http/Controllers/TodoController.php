@@ -12,7 +12,7 @@ class TodoController extends Controller
     {
         $user = Auth::user();
 
-        $todos = $user->todos;
+        $todos = $user->todos()->orderBy('isCompleted', 'asc')->orderBy('created_at' , 'desc')->get();
 
         return response()->json([
             'data' => $todos,

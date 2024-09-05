@@ -85,7 +85,7 @@ export default function TODOLIST() {
           <div className="w-2/12 flex justify-end">
             <button
               onClick={() => handleClickDelete(todo.id)}
-              className="bg-red-300 text-white p-2"
+              className="bg-red-300 text-white p-2 hover:bg-red-400 transition-all duration-500 hover:scale-105 rounded"
             >
               Delete
             </button>

@@ -4,10 +4,12 @@ import { Logout } from "../API/auth";
 
 export default function Nav() {
   const { isAuthenticated, logout } = useAuth();
+  // const navigate = useNavigate()
 
   const handleLogout = () => {
     Logout();
     logout();
+    // navigate('/')
   };
 
   return (
@@ -39,20 +41,20 @@ export default function Nav() {
           </h1>
         </div>
         <div className="lg:w-5/12 w-7/12 flex justify-around">
-          <button className="bg-blue-50 hover:bg-blue-400 border border-blue-500 lg:w-3/12 w-5/12 px-2 py-2 text-blue-500 hover:text-white font-bold">
-            <Link to={"/"}>Register</Link>
-          </button>
+          <Link to={'/'} className="bg-blue-50 hover:bg-blue-400 border border-blue-500 lg:w-3/12 w-5/12 p-2 text-center text-blue-500 hover:text-white font-bold">
+             Register
+          </Link>
           {isAuthenticated ? (
             <button
               onClick={handleLogout}
-              className="bg-blue-50 border hover:bg-blue-400 transition-all border-blue-500 lg:w-3/12 w-5/12 px-2 py-2 text-blue-500 hover:text-white font-bold"
+              className="bg-blue-50 border hover:bg-blue-400 transition-all border-blue-500 lg:w-3/12 w-5/12  p-2 text-center text-blue-500 hover:text-white font-bold"
             >
               logout
             </button>
           ) : (
-            <button className="bg-blue-400 hover:bg-blue-50   lg:w-3/12 w-5/12 px-2 py-2 text-white hover:text-blue-500 border border-blue-500 transition-all font-bold">
-              <Link to={"/login"}>Login</Link>
-            </button>
+            <Link to={'/login'} className="bg-blue-400 hover:bg-blue-50   lg:w-3/12 w-5/12 p-2 text-center text-white hover:text-blue-500 border border-blue-500 transition-all font-bold">
+              login
+            </Link>
           )}
         </div>
       </nav>

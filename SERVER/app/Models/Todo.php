@@ -9,6 +9,8 @@ class Todo extends Model
 {
     use HasFactory;
 
+    protected $table = 'todos';
+
     protected $fillable = ['item','isCompleted', 'user_id'];
 
     public function users() 

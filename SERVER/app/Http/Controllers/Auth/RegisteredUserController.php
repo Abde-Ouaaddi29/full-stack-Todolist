@@ -30,9 +30,9 @@ class RegisteredUserController extends Controller
     public function register(Request $request): JsonResponse
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', Rules\Password::defaults()],
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email|max:255',
+            'password' => 'required|string|min:8|max:255',
         ]);
 
         $user = User::create([
@@ -41,11 +41,8 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        event(new Registered($user));
-
         return response()->json([
             'message' => 'User registered successfully',
-            'status' => 201,
             'data' => $user
         ], 201);
     }

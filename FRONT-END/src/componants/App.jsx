@@ -8,10 +8,10 @@ import Signup from "./signup";
 import ProtectedRoute from "../protectRoutes/ProtectedRoute";
 import { AuthProvider } from "../protectRoutes/authContext";
 import { ErrorPage } from "./errorPage";
-import { UseCsrfToken } from "../protectRoutes/UseCsrfToken";
+// import { UseCsrfToken } from "../protectRoutes/UseCsrfToken";
 
 export default function App() {
-  UseCsrfToken();
+  // UseCsrfToken();
   const isAuthenticated = localStorage.getItem('token')
 
   return (

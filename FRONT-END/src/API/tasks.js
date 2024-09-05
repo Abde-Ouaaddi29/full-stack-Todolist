@@ -15,8 +15,10 @@ export const SetTasks = async (item) => {
         const result = await response.json()
         if(response.ok){
             console.log(result);
+            return result;
         } else {
             console.log('failed to Set tasks', result);
+            return null;
         }
         
     } catch (error) {
@@ -39,14 +41,16 @@ export const GetTasks = async () => {
         })
     
         const result = await response.json()
+        console.log('tasks', result);
 
         if(response.ok){
             console.log('tasks', result);
+            return result;
         } else {
             console.log('failed to fetch tasks', result);
+            return null;
         }
           
-        return result;
 
     } catch (error) {
       console.log(error.message)
@@ -72,8 +76,10 @@ export const UpdateTask = async (id, checked) => {
 
         if(response.ok){
             console.log('tasks', result);
+            return result;
         } else {
             console.log('failed to delete task', result);
+            return null;
         }
 
     } catch (error) {
@@ -99,8 +105,10 @@ export const DeleteTask = async (id) => {
 
         if(response.ok){
             console.log('tasks', result);
+            return result;
         } else {
             console.log('failed to delete task', result);
+            return null;
         }
           
 

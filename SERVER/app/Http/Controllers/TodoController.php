@@ -2,54 +2,54 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Todo;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class TodoController extends Controller
 {
-
-    public function index()
+    public function index(): JsonResponse
     {
-        // $todos = Auth::user()->todos()->paginate(10);
-        $todos = Auth::user()->todos;
-        return response()->json($todos, 201);
-    }
+        $user = Auth::user();
 
+        $todos = $user->todos;
+
+        return response()->json([
+            'data' => $todos,
+            'user' => $user
+        ], 200);
+    }
 
     public function store(Request $request): JsonResponse
     {
+        $user = Auth::user();
         $request->validate([
             'item' => 'required|string|max:255',
         ]);
 
-        $todo = Auth::user()->todos()->create([
+        $todo = $user->todos()->create([
             'item' => $request->item,
             'isCompleted' => false,
-            'user_id' => Auth::id(),
         ]);
 
         return response()->json($todo, 201);
     }
 
-
     public function update(Request $request, $id): JsonResponse
     {
-        $todo = Auth::user()->todos()->findOrFail($id);
+        $user = Auth::user();
+        $todo = $user->todos->find($id);
+
         $todo->update($request->all());
 
-        // $item->isCompleted = !$item->isCompleted ;
-        // $item->save();
-
-        return response()->json($todo);
+        return response()->json($todo, 200);
     }
-
 
     public function destroy($id): JsonResponse
     {
-        Auth::user()->todos()->findOrFail($id)->delete();
+        $user = Auth::user();
+        $user->todos->find($id)->delete();
+
         return response()->json(null, 204);
     }
 }
-

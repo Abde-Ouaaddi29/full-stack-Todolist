@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\LoginRequest;
+use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -15,27 +15,24 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(Request $request): JsonResponse
     {
-        $credentials = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
+        $request->validate([
+            'email' => 'required|email|max:255',
+            'password' => 'required|string|min:8|max:255'
         ]);
 
-        if (Auth::attempt($credentials)) {
-            $user = Auth::user();
-            $token = $user->createToken('api-token')->plainTextToken;
+        $user = User::where('email', $request->email)->first();
+
+        if ($user && Hash::check($request->password, $user->password)) {
+            $token = $user->createToken('token')->plainTextToken;
 
             return response()->json([
-                'message' => 'authenticated',
-                'status' => 200,
                 'token' => $token,
+                'token_type' => 'Bearer',
                 'user' => $user
-            ], 200);
+            ]);
+        } else {
+            return response()->json(['message' => 'the provided credentails are inccorect'], 401);
         }
-
-        return response()->json([
-            'message' => 'Invalid credentials',
-            'status' => 401,
-        ], 401);
     }
 
 

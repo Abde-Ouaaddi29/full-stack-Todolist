@@ -1,4 +1,3 @@
-// Login.jsx
 import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Authentication } from "../API/auth";
@@ -6,10 +5,10 @@ import { useAuth } from "../protectRoutes/authContext";
 
 export default function Login() {
   const { login } = useAuth();
-  const email = useRef("");
-  const password = useRef("");
+  const email = useRef();
+  const password = useRef();
 
-  const [error ,setError] = useState(null);
+  const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,11 +20,11 @@ export default function Login() {
       if (result && result.token) {
         login(result.token);
       } else {
-        setError('* Email or password incorrect!')
+        setError("* Email or password incorrect!");
         console.error("Failed to login");
       }
     } else {
-      setError('* Email and password are required')
+      setError("* Email and password are required");
       console.error("Email and password are required");
     }
   };
@@ -52,8 +51,8 @@ export default function Login() {
       <div className="bg-blue-100 shadow-xl lg:w-5/12 w-11/12 p-6 rounded-md flex flex-col justify-center items-center">
         <div className="w-10/12 flex justify-between items-center mb-3">
           <label className="font-thin" htmlFor="email">
-             {/* <span className="text-red-400"> {error} </span> */}
-              Email: 
+            {/* <span className="text-red-400"> {error} </span> */}
+            Email:
           </label>
           <input
             id="email"
@@ -64,8 +63,8 @@ export default function Login() {
         </div>
         <div className="w-10/12 flex justify-between items-center mb-3">
           <label className="font-thin" htmlFor="password">
-             {/* <span className="text-red-400"> {error} </span>   */}
-             Password:
+            {/* <span className="text-red-400"> {error} </span>   */}
+            Password:
           </label>
           <input
             id="password"
@@ -76,14 +75,14 @@ export default function Login() {
         </div>
         <div className=" w-10/12 text-start">
           <span className="text-red-400 text-sm">{error} </span>
-        </div> 
+        </div>
         <div className="w-10/12 flex justify-between items-center mt-6 ">
           <button
             onClick={handleSubmit}
             className="border bg-blue-400 px-4 py-2 rounded-sm text-white font-medium"
             type="submit"
           >
-           submit
+            submit
           </button>
           <Link
             className="font-light text-blue-700 underline"
